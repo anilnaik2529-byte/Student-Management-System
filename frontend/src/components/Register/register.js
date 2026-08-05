@@ -18,6 +18,7 @@ function Register() {
         const response = await api.post("/users/register", user);
         if (response.data === "Register successful") {
           setUser({
+            
   gmail: "",
   password: "",
 });
