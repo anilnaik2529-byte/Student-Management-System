@@ -13,9 +13,14 @@ function Register() {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
   const registerUser = async (e) => {
+      e.preventDefault();
     try {
         const response = await api.post("/users/register", user);
         if (response.data === "Register successful") {
+          setUser({
+  gmail: "",
+  password: "",
+});
         toast.success("User registered successfully!");
         navigate("/");
       } else {
@@ -38,6 +43,7 @@ function Register() {
           placeholder="Enter Gmail"
           value={user.gmail}
           onChange={handleChange}
+          autoComplete="off"
         />
 
         <label>Password</label>
@@ -47,6 +53,7 @@ function Register() {
           placeholder="Enter Password"
           value={user.password}
           onChange={handleChange}
+          autoComplete="new-password"
         />
 
         <button onClick={registerUser}>Register</button>

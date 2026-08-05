@@ -15,10 +15,15 @@ function Login() {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
   const loginUser = async (e) => {
+     e.preventDefault();
     try {
       const response = await api.post("/users/login", user);
       if (response.data) {
         localStorage.setItem("token", response.data);
+        setUser({
+  gmail: "",
+  password: "",
+});
         toast.success("Login successful");
         navigate("/dashboard");
        
@@ -42,6 +47,7 @@ function Login() {
           placeholder="Enter Gmail"
           value={user.gmail}
           onChange={handleChange}
+          autoComplete="off"
         />
 
         <label>Password</label>
@@ -51,6 +57,7 @@ function Login() {
           placeholder="Enter Password"
           value={user.password}
           onChange={handleChange}
+          autoComplete="new-password"
         />
 
         <button onClick={loginUser}>Login</button>
