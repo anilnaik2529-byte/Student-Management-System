@@ -16,12 +16,12 @@ function Register() {
       e.preventDefault();
     try {
         const response = await api.post("/users/register", user);
-        if (response.data === "Register successful") {
+        if (response.data === "Register Successful") {
           setUser({
             
-  gmail: "",
-  password: "",
-});
+                    gmail: "",
+                   password: "",
+                 });
         toast.success("User registered successfully!");
         navigate("/");
       } else {
