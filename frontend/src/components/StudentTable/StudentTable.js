@@ -43,7 +43,8 @@ function StudentTable({ students, getStudents, setSelectedStudent }) {
         onChange={(e) => setSearch(e.target.value)}
         className="search-box"
       />
-      <table>
+     <div className="table-wrapper">
+  <table>
         <thead>
           <tr>
             <th>ID</th>
@@ -75,7 +76,8 @@ function StudentTable({ students, getStudents, setSelectedStudent }) {
             </tr>
           ))}
         </tbody>
-      </table>
+       </table>
+</div>
       <div className="pagination">
   <button
     onClick={() => setCurrentPage(currentPage - 1)}
