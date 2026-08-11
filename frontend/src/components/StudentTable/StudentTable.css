@@ -108,16 +108,19 @@ font-size:14px;
 }
 /* Mobile only */
 @media (max-width: 600px) {
-    .table-container {
-        overflow-x: hidden;
-    }
+  .table-container {
+    width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+  }
 
-    .table-wrapper {
-        width: 100%;
-        overflow-x: auto;
-    }
+  .table-wrapper {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+  }
 
-    .table-wrapper table {
-        min-width: 700px;
-    }
+  .table-wrapper table {
+    min-width: 700px;
+  }
 }
