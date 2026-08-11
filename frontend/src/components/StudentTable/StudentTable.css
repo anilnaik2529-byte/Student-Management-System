@@ -108,6 +108,10 @@ font-size:14px;
 }
 /* Mobile only */
 @media (max-width: 600px) {
+    .table-container {
+        overflow-x: hidden;
+    }
+
     .table-wrapper {
         width: 100%;
         overflow-x: auto;
