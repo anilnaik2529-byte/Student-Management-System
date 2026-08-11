@@ -1,7 +1,6 @@
-import {useState} from "react";
-import{Link} from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../../services/api";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./Login.css";
 
@@ -10,28 +9,35 @@ function Login() {
     gmail: "",
     password: "",
   });
+
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
+
   const loginUser = async (e) => {
-     e.preventDefault();
+    e.preventDefault();
+
     try {
       const response = await api.post("/users/login", user);
-      if (response.data) {
-        localStorage.setItem("token", response.data);
-        setUser({
-  gmail: "",
-  password: "",
-});
-        toast.success("Login successful");
-        navigate("/dashboard");
-       
-      } else {
-        toast.error("Invalid gmail or password");
+
+      if (response.data === "Invalid Gmail or Password") {
+        toast.error("Invalid Gmail or Password");
+        return;
       }
+
+      localStorage.setItem("token", response.data);
+
+      setUser({
+        gmail: "",
+        password: "",
+      });
+
+      toast.success("Login successful");
+      navigate("/dashboard");
     } catch (error) {
-      toast.error("server error");
+      toast.error("Server error");
     }
   };
 
@@ -61,8 +67,10 @@ function Login() {
         />
 
         <button onClick={loginUser}>Login</button>
+
         <p className="register-text">
-          Don't have an account?{" "} <Link to="/register">Create account</Link>
+          Don't have an account?{" "}
+          <Link to="/register">Create account</Link>
         </p>
       </div>
     </div>
