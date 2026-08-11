@@ -10,11 +10,12 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://anil-student-management-system-production-e998.up.railway.app")
 public class UserController {
 
     @Autowired
     private UserService userService;
+
     @Autowired
     private JwtService jwtService;
 
@@ -25,20 +26,19 @@ public class UserController {
 
         if (dbUser.isPresent() &&
                 dbUser.get().getPassword().equals(user.getPassword())) {
-            String token =jwtService.generateToken(user.getGmail());
+            String token = jwtService.generateToken(user.getGmail());
             return token;
         }
 
         return "Invalid Gmail or Password";
     }
+
     @PostMapping("/register")
     public String register(@RequestBody User user) {
-        try
-        {
+        try {
             userService.register(user);
             return "Register Successful";
-        }
-        catch(RuntimeException e){
+        } catch (RuntimeException e) {
             return e.getMessage();
         }
     }
